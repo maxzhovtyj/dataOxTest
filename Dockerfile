@@ -1,9 +1,11 @@
 FROM python:3.8-slim-buster
 
-WORKDIR /app
+WORKDIR /dataOxTest
 
-RUN pip3 install
+COPY requirements.txt .
 
-COPY . .
+RUN pip3 install -r requirements.txt
 
-CMD [ "python3", "./main.py"]
+COPY ./app ./app
+
+CMD ["python3", "./app/main.py"]
