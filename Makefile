@@ -2,10 +2,6 @@
 run:
 		python3 main.py
 
-.PHONY: connectDB
-connectDB:
-		docker exec -it 72ecabb63e44 /bin/bash
-
 # create database dump file
 .PHONY: dump
 dump:

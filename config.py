@@ -1,8 +1,10 @@
-host = "localhost"
+host = "db"
+# host = "localhost"
+port = "5432"
+# port = "58060"
 user = "postgres"
-password = "30042003"
+password = "qwerty123"
 # sensitive data better save in .env file
 db_name = "postgres"
-port = "58060"
 
-MAX_PAGES = 2
+MAX_PAGES = 5

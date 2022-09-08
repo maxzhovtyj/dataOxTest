@@ -21,7 +21,7 @@ async def main():
             for article in data:
                 Article.create(**article)
 
-        print("data was inserted into database")
+        print("[INFO] data was inserted into database")
     except Exception as ex:
         print("[WARNING] something went wrong", ex)
     finally:
@@ -65,6 +65,7 @@ async def parse_articles(session):
                     beds = e.select(".rental-info > .bedrooms")[0].text
                     beds = " ".join(beds.split())
 
+                    # TODO time parsing
                     item = {
                         "img_url": img_url,
                         "title": e.select(".info > .info-container > .title > .title")[0].text.strip(),
