@@ -5,14 +5,15 @@
 ### config.py:
 MAX_PAGES - amount of pages to be parsed by the program
 
-### Build
-```commandline
-docker build -t app .
-```
 
 ### Build an app and run docker-compose
 ```commandline
 docker-compose up --build app
+```
+
+### Build
+```commandline
+docker build -t app .
 ```
 
 ### To create database dumpfile:

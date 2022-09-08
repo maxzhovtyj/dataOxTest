@@ -3,6 +3,7 @@ import asyncio
 from bs4 import BeautifulSoup as BS
 from schema import *
 import re
+from datetime import datetime
 
 db = PostgresqlDatabase(host=host, user=user, password=password, database=db_name, port=port)
 
@@ -65,14 +66,21 @@ async def parse_articles(session):
                     beds = e.select(".rental-info > .bedrooms")[0].text
                     beds = " ".join(beds.split())
 
-                    # TODO time parsing
+                    created_at = e.select(".info > .info-container > .location > span")[1].text.strip()
+                    created_at = created_at.replace("/", "-")
+
+                    # if article was created recently
+                    if not created_at.find("<"):
+                        current = datetime.now()
+                        created_at = str(current.day) + "-" + str(current.month) + "-" + str(current.year)
+
                     item = {
                         "img_url": img_url,
                         "title": e.select(".info > .info-container > .title > .title")[0].text.strip(),
                         "currency": currency,
                         "price": price,
                         "city": e.select(".info > .info-container > .location > span")[0].text.strip(),
-                        "created_at": e.select(".info > .info-container > .location > span")[1].text.strip(),
+                        "created_at": created_at,
                         "description": e.select(".info > .info-container > .description")[0].text.strip(),
                         "beds": beds
                     }
